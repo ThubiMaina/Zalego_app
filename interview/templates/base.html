@@ -91,9 +91,13 @@ body {
 
 <div class="topnav" id="myTopnav">
   <a href="{% url "posts:list" %}" class="active">Home</a>
-  <a href="{% url 'register'%}">Register<span class="sr-only">(current)</span></a>
-  <a href="{% url 'login'%}">login<span class="sr-only">(current)</span></a>
-  <a href="{% url 'logout'%}">Logout <span class="sr-only">(current)</span></a>
+  <a href="{% url 'register'%}">Register</a>
+  {% if not request.user.is_authenticated %}
+  <a href="{% url 'login'%}">login</a>
+  {% endif %}
+  {% if request.user.is_authenticated %}
+  <a href="{% url 'logout'%}">Logout </a>
+  {% endif %}
   <li><a href="#">User: <span>{{user}}</span></a></li>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
@@ -133,26 +137,7 @@ function myFunction() {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js'></script>
 
-<script>
-    jQuery(function(){
-      jQuery('#camera_wrap_1').camera({
-        height: '550px',
-        loader: 'bar',
-        pagination: false,
-        thumbnails: true
-      });
-    });
-  </script>
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-  
-  </script>
+
 
 </body>
 </html>
