@@ -25,6 +25,9 @@ def post_create(request):
 		"form": form,
 	}
 	return render(request ,"post_form.html",context)
+
+def dashboard(request):
+	return render(request ,"dashboard.html")
 @login_required
 def post_detail(request ,id=None):#retrieve
 	instance = get_object_or_404(Post,id=id)
@@ -95,5 +98,5 @@ def post_delete(request, id=None):
 		instance.delete() 
 		messages.success(request, "Deleted")
 	else:
-		messages.warning(request, "You can only delete what to post")
+		messages.warning(request, "You can only delete your own post")
 	return redirect('/posts/')
